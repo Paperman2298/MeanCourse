@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './post-create.component.html'
 })
 export class PostCreateComponent implements OnInit {
+  newPost = '';
 
   constructor() { }
 
@@ -12,7 +13,7 @@ export class PostCreateComponent implements OnInit {
   }
 
   onAddPost = () => {
-    alert('Post added');
+    this.newPost = 'The user\'s post';
   }
 
 }
