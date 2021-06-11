@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './post-create.component.html'
 })
 export class PostCreateComponent implements OnInit {
-  newPost = '';
+  newPost = 'Prueba';
 
   constructor() { }
 
