@@ -1,8 +1,20 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const Post = require('./models/post');
 const app = express();
+
+mongoose.connect('mongodb+srv://Joel_Santillan2298:ETF8DYHnYSRZeLrh@meancoursecluster.wyroj.mongodb.net/mean-course?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true,
+    useCreateIndex: true
+}).then(() => {
+    console.log('Connected to database');
+}).catch(() => {
+    console.log('Connection failed!');
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -13,13 +25,13 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
     next();
 });
-// ETF8DYHnYSRZeLrh
+
 app.post('/api/posts', (req, res, next) => {
-    const posts = new Post({
+    const post = new Post({
         title: req.body.title,
         content: req.body.content
     });
-    console.log(posts);
+    post.save();
     res.status(201).json({
         message: 'Post added successfully'
     }); //Typical number to express everything is okay
