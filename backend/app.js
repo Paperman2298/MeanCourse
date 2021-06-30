@@ -57,4 +57,6 @@ app.delete('/api/posts/:id', (req, res, next) => {
     });
 });
 
+// Run the app with "npm run start:server"
+
 module.exports = app;
