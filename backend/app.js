@@ -27,8 +27,8 @@ app.use((req, res, next) => {
     next();
 });
 
-// Run the app with "npm run start:server"
-
+// Route for the "posts" path
 app.use('/api/posts', postRoutes);
 
+// Run the app with "npm run start:server"
 module.exports = app;
