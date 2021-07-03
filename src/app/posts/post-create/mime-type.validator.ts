@@ -9,6 +9,7 @@ export const mimeType = (
   }
   const file = control.value as File;
   const fileReader = new FileReader();
+  // tslint:disable-next-line: deprecation
   const frObs = Observable.create(
     (observer: Observer<{ [key: string]: any }>) => {
       fileReader.addEventListener('loadend', () => {
