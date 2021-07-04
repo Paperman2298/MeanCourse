@@ -45,17 +45,24 @@ router.post('', multer({ storage: storage }).single('image'), (req, res, next) =
     });
 });
 
-router.put('/:id', (req, res, next) => {
+router.put('/:id', multer({ storage: storage }).single('image'), (req, res, next) => {
+    let imagePath = req.body.imagePath;
+    if (req.file) {
+        const url = req.protocol + '://' + req.get('host');
+        imagePath = url + '/images/' + req.file.filename;
+    }
     const post = new Post({
         _id: req.body.id,
         title: req.body.title,
-        content: req.body.content
+        content: req.body.content,
+        imagePath
     });
+    console.log(post);
     Post.updateOne({ _id: req.params.id }, post).then(result => {
         console.log(result);
         res.status(200).json({ message: 'Update successful!' })
     })
-})
+});
 
 router.get('', (req, res, next) => {
     Post.find().then(documents => {
@@ -74,7 +81,7 @@ router.get('/:id', (req, res, next) => {
             res.status(404).json({ message: 'Post not found' });
         }
     })
-})
+});
 
 router.delete('/:id', (req, res, next) => {
     Post.deleteOne({ _id: req.params.id }).then(result => {
